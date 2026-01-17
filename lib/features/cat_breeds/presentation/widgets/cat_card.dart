@@ -29,7 +29,7 @@ class CatCard extends StatelessWidget {
                   ),
                 ),
                 TextButton(
-                  onPressed: () => context.push('/detail', extra: breed),
+                  onPressed: () => context.push('/details', extra: breed),
                   child: const Text("Más..."),
                 ),
               ],
@@ -62,6 +62,9 @@ class CatCard extends StatelessWidget {
           placeholder: (context, url) => Container(
             color: const Color(0xFF5FD1FD),
             child: const Center(child: CircularProgressIndicator()),
+          ),
+          errorWidget: (context, url, error) => const Center(
+            child: Icon(Icons.broken_image, size: 60, color: Colors.red),
           ),
         ),
       );

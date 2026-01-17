@@ -31,7 +31,7 @@ class DevDioConfigImpl implements DioConfig {
 @Singleton(as: DioConfig)
 class ProdDioConfigImpl implements DioConfig {
   @override
-  String get baseUrl => 'https://yourprodapi.com/api';
+  String get baseUrl => 'https://api.thecatapi.com/v1/';
 
   @override
   int get receiveTimeout => 10000;
