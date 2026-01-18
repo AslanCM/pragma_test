@@ -73,9 +73,9 @@ class _LandingPageState extends State<LandingPage> {
               builder: (context, state) {
                 return state.when(
                   initial: () =>
-                      const Center(child: CircularProgressIndicator()),
+                      const Center(child: CircularProgressIndicator.adaptive()),
                   loading: () =>
-                      const Center(child: CircularProgressIndicator()),
+                      const Center(child: CircularProgressIndicator.adaptive()),
                   error: (msg) => _error(context, msg),
                   loaded:
                       (
@@ -90,7 +90,7 @@ class _LandingPageState extends State<LandingPage> {
                             child: Text("No se encontraron razas"),
                           );
                         }
-                        return RefreshIndicator(
+                        return RefreshIndicator.adaptive(
                           onRefresh: () async {
                             context.read<CatBreedBloc>().add(
                               const CatBreedEvent.started(),
@@ -106,7 +106,7 @@ class _LandingPageState extends State<LandingPage> {
                                 return const Padding(
                                   padding: EdgeInsets.all(16.0),
                                   child: Center(
-                                    child: CircularProgressIndicator(),
+                                    child: CircularProgressIndicator.adaptive(),
                                   ),
                                 );
                               }

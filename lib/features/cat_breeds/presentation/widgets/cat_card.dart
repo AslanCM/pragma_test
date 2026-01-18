@@ -63,7 +63,7 @@ class CatCard extends StatelessWidget {
             fit: BoxFit.contain,
             placeholder: (context, url) => Container(
               color: const Color(0xFF5FD1FD),
-              child: const Center(child: CircularProgressIndicator()),
+              child: const Center(child: CircularProgressIndicator.adaptive()),
             ),
             errorWidget: (context, url, error) => const Center(
               child: Icon(Icons.broken_image, size: 60, color: Colors.red),

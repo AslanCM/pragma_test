@@ -1,16 +1,42 @@
 # pragma_catbreeds
 
-A new Flutter project.
+Aplicación de listado de razas de gatos con Clean Architecture.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+Tener instalado y configurado lo siguiente la máquina:
+- **Flutter SDK**
+- **Java JDK** (Versión 17 recomendada o superior, la OpenJDK 24 es compatible).
+- **Android Studio / VS Code.** Android Studio / VS Code
+- **Xcode** (Solo si desea ejecutar en iOS desde una Mac).
 
-A few resources to get you started if this is your first Flutter project:
+Para verificar tu entorno, ejecuta:
+```bash
+flutter doctor
+java -version
+```
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+El proyecto requiere un archivo .env para funcionar
+- Pégar el archivo en la raíz del proyecto (al mismo nivel que pubspec.yaml).
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Pasos
+1. Instalación de Dependencias
+2. Configuración e inyeccion de Dependencias
+3. Correr el proyecto
+
+Instalación de Dependencias
+- correr en la terminal de comandos estando en la carpeta del proyecto pragma_catbreeds command: **flutter pub get**
+
+Configuración e inyección de Dependencia
+- correr en la terminal de comandos estando en la carpeta del proyecto pragma_catbreeds command: **dart run build_runner build --delete-conflicting-outputs**
+
+Correr el proyecto
+-   Despues de que todo lo anterior está satisfecho de la manera correcta y aber corregido los problemas dados con **flutter doctor**
+    podrá correr la aplicación con el comando **flutter run** en caso tal de tener vscode, puede lanzar con el debug mode dando F5 o corriendo el entorno
+    **Pragma App (DEV)**
+
+-   Para correr el proyecto en mac con ios emulator **open -a Simulator** una vez cargue el emulador de mac correr el comando **flutter run**
+-   Para correr el proyecto en android se debe **flutter emulators** tomar el id del emulador **flutter emulators --launch <IdEmulador>**  y luego correr el comando **flutter run**
+
+Generar la apk en android
+- command: **flutter build apk --debug**
