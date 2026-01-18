@@ -16,22 +16,22 @@ class DetailPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              constraints: const BoxConstraints(
-                maxHeight: 450,
-                minHeight: 350,
-              ),
+              constraints: const BoxConstraints(maxHeight: 450, minHeight: 350),
               width: double.infinity,
               child: breed.imageUrl != null && breed.imageUrl!.isNotEmpty
-                  ? CachedNetworkImage(
-                      imageUrl: breed.imageUrl!,
-                      fit: BoxFit.contain,
-                      placeholder: (context, url) =>
-                          const Center(child: CircularProgressIndicator()),
-                      errorWidget: (context, url, error) => const Center(
-                        child: Icon(
-                          Icons.broken_image,
-                          size: 100,
-                          color: Colors.red,
+                  ? Hero(
+                      tag: breed.id,
+                      child: CachedNetworkImage(
+                        imageUrl: breed.imageUrl!,
+                        fit: BoxFit.contain,
+                        placeholder: (context, url) =>
+                            const Center(child: CircularProgressIndicator()),
+                        errorWidget: (context, url, error) => const Center(
+                          child: Icon(
+                            Icons.broken_image,
+                            size: 100,
+                            color: Colors.red,
+                          ),
                         ),
                       ),
                     )

@@ -55,49 +55,106 @@ class _LandingPageState extends State<LandingPage> {
       appBar: AppBar(title: const Text("CatBreeds"), centerTitle: true),
       body: Column(
         children: [
-          Padding(padding: const EdgeInsets.all(16.0),
-          child: TextField(
-            decoration: InputDecoration(
-              labelText: 'Buscar raza',
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8.0),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: TextField(
+              decoration: InputDecoration(
+                labelText: 'Buscar raza',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8.0),
+                ),
+                suffixIcon: const Icon(Icons.search),
               ),
-              suffixIcon: const Icon(Icons.search),
+              onChanged: (value) => _onSearchChanged(value, context),
             ),
-            onChanged: (value) => _onSearchChanged(value, context),
-          ),
           ),
           Expanded(
             child: BlocBuilder<CatBreedBloc, CatBreedState>(
               builder: (context, state) {
                 return state.when(
-                  initial: () => const Center(child: CircularProgressIndicator()),
-                  loading: () => const Center(child: CircularProgressIndicator()),
-                  error: (msg) => Center(child: Text("Error: $msg")),
-                  loaded: (breeds, page, hasReachedMax, currentQuery, isLoadingMore) {
-                    if (breeds.isEmpty) {
-                      return const Center(child: Text("No se encontraron razas"));
-                    }
-                    return ListView.builder(
-                      controller: _scrollController,
-                      itemCount: breeds.length + (isLoadingMore ? 1 : 0),
-                      itemBuilder: (context, index) {
-                        if (index < breeds.length) {
-                        return CatCard(breed: breeds[index]);
-                        } else {
-                          return const Padding(
-                            padding: EdgeInsets.all(16.0),
-                            child: Center(child: CircularProgressIndicator()),
+                  initial: () =>
+                      const Center(child: CircularProgressIndicator()),
+                  loading: () =>
+                      const Center(child: CircularProgressIndicator()),
+                  error: (msg) => _error(context, msg),
+                  loaded:
+                      (
+                        breeds,
+                        page,
+                        hasReachedMax,
+                        currentQuery,
+                        isLoadingMore,
+                      ) {
+                        if (breeds.isEmpty) {
+                          return const Center(
+                            child: Text("No se encontraron razas"),
                           );
                         }
+                        return RefreshIndicator(
+                          onRefresh: () async {
+                            context.read<CatBreedBloc>().add(
+                              const CatBreedEvent.started(),
+                            );
+                          },
+                          child: ListView.builder(
+                            controller: _scrollController,
+                            itemCount: breeds.length + (isLoadingMore ? 1 : 0),
+                            itemBuilder: (context, index) {
+                              if (index < breeds.length) {
+                                return CatCard(breed: breeds[index]);
+                              } else {
+                                return const Padding(
+                                  padding: EdgeInsets.all(16.0),
+                                  child: Center(
+                                    child: CircularProgressIndicator(),
+                                  ),
+                                );
+                              }
+                            },
+                          ),
+                        );
                       },
-                    );
-                  }
                 );
-              }
-              )
-          )
-        ]
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _error(BuildContext context, String message) {
+    return Center(
+      child: Padding(
+        padding: EdgeInsets.all(18.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Icon(Icons.wifi_off_rounded, size: 80, color: Colors.grey),
+            const SizedBox(height: 18),
+            const Text(
+              "¡Ups! Ocurrió un error",
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 10),
+            Text(
+              "Por favor revisa tu conexión a internet o comunicate con nosotros. \n$message",
+              textAlign: TextAlign.center,
+              style: const TextStyle(color: Colors.grey, fontSize: 16),
+            ),
+            const SizedBox(height: 30),
+            FilledButton.icon(
+              icon: const Icon(Icons.refresh),
+              label: const Text("Reintentar"),
+              style: ButtonStyle(
+                backgroundColor: WidgetStatePropertyAll(Color(0xFF5FD1FD)),
+              ),
+              onPressed: () {
+                context.read<CatBreedBloc>().add(const CatBreedEvent.started());
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

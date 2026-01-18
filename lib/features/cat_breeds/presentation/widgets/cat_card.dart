@@ -56,15 +56,18 @@ class CatCard extends StatelessWidget {
       return SizedBox(
         height: 350,
         width: double.infinity,
-        child: CachedNetworkImage(
-          imageUrl: breed.imageUrl!,
-          fit: BoxFit.contain,
-          placeholder: (context, url) => Container(
-            color: const Color(0xFF5FD1FD),
-            child: const Center(child: CircularProgressIndicator()),
-          ),
-          errorWidget: (context, url, error) => const Center(
-            child: Icon(Icons.broken_image, size: 60, color: Colors.red),
+        child: Hero(
+          tag: breed.id,
+          child: CachedNetworkImage(
+            imageUrl: breed.imageUrl!,
+            fit: BoxFit.contain,
+            placeholder: (context, url) => Container(
+              color: const Color(0xFF5FD1FD),
+              child: const Center(child: CircularProgressIndicator()),
+            ),
+            errorWidget: (context, url, error) => const Center(
+              child: Icon(Icons.broken_image, size: 60, color: Colors.red),
+            ),
           ),
         ),
       );
