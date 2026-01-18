@@ -27,6 +27,7 @@ Pasos
 Instalación de Dependencias
 - correr en la terminal de comandos estando en la carpeta del proyecto pragma_catbreeds command: **flutter pub get**
 
+**Importante**
 Configuración e inyección de Dependencia
 - correr en la terminal de comandos estando en la carpeta del proyecto pragma_catbreeds command: **dart run build_runner build --delete-conflicting-outputs**
 
@@ -40,3 +41,8 @@ Correr el proyecto
 
 Generar la apk en android
 - command: **flutter build apk --debug**
+
+**Aún más importante**
+Por razones de no poder facilitar el .env se dejan las variables necesarias para realizar la prueba
+CAT_API_KEY=live_99Qe4Ppj34NdplyLW67xCV7Ds0oSLKGgcWWYnSzMJY9C0QOu0HUR4azYxWkyW2nr
+- por favor craer el archivo .env y lanzar la app
