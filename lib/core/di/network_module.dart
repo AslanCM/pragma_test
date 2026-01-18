@@ -21,7 +21,7 @@ abstract class NetworkModule {
       headers: {
         'Content-Type': 'application/json',
         'x-api-key': dotenv.env['CAT_API_KEY'] ?? '',
-      }
+      },
       ));
 
       return _configureDio(dio, dioConfig);

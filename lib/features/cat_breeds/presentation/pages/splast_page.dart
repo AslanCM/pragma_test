@@ -24,7 +24,7 @@ class _SplashPageState extends State<SplashPage> {
     return BlocListener<CatBreedBloc, CatBreedState>(
       listener: (context, state) {
         state.whenOrNull(
-          loaded: (_) => context.go('/home'),
+          loaded: (_, _, _, _, _) => context.go('/home'),
           error: (_) => context.go('/home'),
         );
       },

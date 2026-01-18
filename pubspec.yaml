@@ -47,7 +47,8 @@ dependencies:
   google_fonts: 7.0.2
   logger: 2.6.2
   pretty_dio_logger: 1.4.0
-  fpdart: ^1.2.0
+  fpdart: 1.2.0
+  bloc_concurrency: 0.3.0
 
 dev_dependencies:
   flutter_test:

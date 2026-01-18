@@ -13,12 +13,25 @@ class CatBreedRepositoryImpl implements CatBreedRepository {
   CatBreedRepositoryImpl(this._dataSource);
 
   @override
-  Future<Either<Failure, List<CatBreed>>> getAllCatBreeds() async {
+  Future<Either<Failure, List<CatBreed>>> getAllCatBreeds(int page) async {
     try {
-      final catBreeds = await _dataSource.getAllCatBreeds();
+      final catBreeds = await _dataSource.getAllCatBreeds(page);
       final catBreedsEntities =
           catBreeds.map((catBreed) => catBreed.toEntity()).toList();
   
+      return Right(catBreedsEntities);
+    } catch (e) {
+      return Left(ServerFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<CatBreed>>> searchCatBreeds(String query) async {
+    try {
+      final catBreeds = await _dataSource.searchCatBreeds(query);
+      final catBreedsEntities =
+          catBreeds.map((catBreed) => catBreed.toEntity()).toList();
+
       return Right(catBreedsEntities);
     } catch (e) {
       return Left(ServerFailure());

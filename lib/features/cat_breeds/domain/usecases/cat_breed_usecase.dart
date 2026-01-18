@@ -11,7 +11,11 @@ class CatBreedUsecase {
 
   CatBreedUsecase(this.repository);
 
-  Future<Either<Failure, List<CatBreed>>> call() {
-    return repository.getAllCatBreeds();
+  Future<Either<Failure, List<CatBreed>>> call(int page) {
+    return repository.getAllCatBreeds(page);
+  }
+
+  Future<Either<Failure, List<CatBreed>>> search(String query) {
+    return repository.searchCatBreeds(query);
   }
 }

@@ -55,11 +55,13 @@ extension CatBreedEventPatterns on CatBreedEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Started value)?  started,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Started value)?  started,TResult Function( _Search value)?  search,TResult Function( _LoadMore value)?  loadMore,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _Started() when started != null:
-return started(_that);case _:
+return started(_that);case _Search() when search != null:
+return search(_that);case _LoadMore() when loadMore != null:
+return loadMore(_that);case _:
   return orElse();
 
 }
@@ -77,11 +79,13 @@ return started(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Started value)  started,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Started value)  started,required TResult Function( _Search value)  search,required TResult Function( _LoadMore value)  loadMore,}){
 final _that = this;
 switch (_that) {
 case _Started():
-return started(_that);case _:
+return started(_that);case _Search():
+return search(_that);case _LoadMore():
+return loadMore(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -98,11 +102,13 @@ return started(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Started value)?  started,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Started value)?  started,TResult? Function( _Search value)?  search,TResult? Function( _LoadMore value)?  loadMore,}){
 final _that = this;
 switch (_that) {
 case _Started() when started != null:
-return started(_that);case _:
+return started(_that);case _Search() when search != null:
+return search(_that);case _LoadMore() when loadMore != null:
+return loadMore(_that);case _:
   return null;
 
 }
@@ -119,10 +125,12 @@ return started(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  started,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  started,TResult Function( String query)?  search,TResult Function()?  loadMore,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Started() when started != null:
-return started();case _:
+return started();case _Search() when search != null:
+return search(_that.query);case _LoadMore() when loadMore != null:
+return loadMore();case _:
   return orElse();
 
 }
@@ -140,10 +148,12 @@ return started();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  started,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  started,required TResult Function( String query)  search,required TResult Function()  loadMore,}) {final _that = this;
 switch (_that) {
 case _Started():
-return started();case _:
+return started();case _Search():
+return search(_that.query);case _LoadMore():
+return loadMore();case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -160,10 +170,12 @@ return started();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  started,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  started,TResult? Function( String query)?  search,TResult? Function()?  loadMore,}) {final _that = this;
 switch (_that) {
 case _Started() when started != null:
-return started();case _:
+return started();case _Search() when search != null:
+return search(_that.query);case _LoadMore() when loadMore != null:
+return loadMore();case _:
   return null;
 
 }
@@ -195,6 +207,104 @@ int get hashCode => runtimeType.hashCode;
 @override
 String toString() {
   return 'CatBreedEvent.started()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class _Search implements CatBreedEvent {
+  const _Search(this.query);
+  
+
+ final  String query;
+
+/// Create a copy of CatBreedEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$SearchCopyWith<_Search> get copyWith => __$SearchCopyWithImpl<_Search>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Search&&(identical(other.query, query) || other.query == query));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,query);
+
+@override
+String toString() {
+  return 'CatBreedEvent.search(query: $query)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$SearchCopyWith<$Res> implements $CatBreedEventCopyWith<$Res> {
+  factory _$SearchCopyWith(_Search value, $Res Function(_Search) _then) = __$SearchCopyWithImpl;
+@useResult
+$Res call({
+ String query
+});
+
+
+
+
+}
+/// @nodoc
+class __$SearchCopyWithImpl<$Res>
+    implements _$SearchCopyWith<$Res> {
+  __$SearchCopyWithImpl(this._self, this._then);
+
+  final _Search _self;
+  final $Res Function(_Search) _then;
+
+/// Create a copy of CatBreedEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? query = null,}) {
+  return _then(_Search(
+null == query ? _self.query : query // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class _LoadMore implements CatBreedEvent {
+  const _LoadMore();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LoadMore);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'CatBreedEvent.loadMore()';
 }
 
 
@@ -320,12 +430,12 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( List<CatBreed> catBreeds)?  loaded,TResult Function( String message)?  error,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( List<CatBreed> catBreeds,  int page,  bool hasReachedMax,  String currentQuery,  bool isLoadingMore)?  loaded,TResult Function( String message)?  error,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case _Loading() when loading != null:
 return loading();case _Loaded() when loaded != null:
-return loaded(_that.catBreeds);case _Error() when error != null:
+return loaded(_that.catBreeds,_that.page,_that.hasReachedMax,_that.currentQuery,_that.isLoadingMore);case _Error() when error != null:
 return error(_that.message);case _:
   return orElse();
 
@@ -344,12 +454,12 @@ return error(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( List<CatBreed> catBreeds)  loaded,required TResult Function( String message)  error,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( List<CatBreed> catBreeds,  int page,  bool hasReachedMax,  String currentQuery,  bool isLoadingMore)  loaded,required TResult Function( String message)  error,}) {final _that = this;
 switch (_that) {
 case _Initial():
 return initial();case _Loading():
 return loading();case _Loaded():
-return loaded(_that.catBreeds);case _Error():
+return loaded(_that.catBreeds,_that.page,_that.hasReachedMax,_that.currentQuery,_that.isLoadingMore);case _Error():
 return error(_that.message);case _:
   throw StateError('Unexpected subclass');
 
@@ -367,12 +477,12 @@ return error(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( List<CatBreed> catBreeds)?  loaded,TResult? Function( String message)?  error,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( List<CatBreed> catBreeds,  int page,  bool hasReachedMax,  String currentQuery,  bool isLoadingMore)?  loaded,TResult? Function( String message)?  error,}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case _Loading() when loading != null:
 return loading();case _Loaded() when loaded != null:
-return loaded(_that.catBreeds);case _Error() when error != null:
+return loaded(_that.catBreeds,_that.page,_that.hasReachedMax,_that.currentQuery,_that.isLoadingMore);case _Error() when error != null:
 return error(_that.message);case _:
   return null;
 
@@ -449,7 +559,7 @@ String toString() {
 
 
 class _Loaded implements CatBreedState {
-  const _Loaded(final  List<CatBreed> catBreeds): _catBreeds = catBreeds;
+  const _Loaded({required final  List<CatBreed> catBreeds, this.page = 0, this.hasReachedMax = false, this.currentQuery = '', this.isLoadingMore = false}): _catBreeds = catBreeds;
   
 
  final  List<CatBreed> _catBreeds;
@@ -459,6 +569,10 @@ class _Loaded implements CatBreedState {
   return EqualUnmodifiableListView(_catBreeds);
 }
 
+@JsonKey() final  int page;
+@JsonKey() final  bool hasReachedMax;
+@JsonKey() final  String currentQuery;
+@JsonKey() final  bool isLoadingMore;
 
 /// Create a copy of CatBreedState
 /// with the given fields replaced by the non-null parameter values.
@@ -470,16 +584,16 @@ _$LoadedCopyWith<_Loaded> get copyWith => __$LoadedCopyWithImpl<_Loaded>(this, _
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Loaded&&const DeepCollectionEquality().equals(other._catBreeds, _catBreeds));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Loaded&&const DeepCollectionEquality().equals(other._catBreeds, _catBreeds)&&(identical(other.page, page) || other.page == page)&&(identical(other.hasReachedMax, hasReachedMax) || other.hasReachedMax == hasReachedMax)&&(identical(other.currentQuery, currentQuery) || other.currentQuery == currentQuery)&&(identical(other.isLoadingMore, isLoadingMore) || other.isLoadingMore == isLoadingMore));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_catBreeds));
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_catBreeds),page,hasReachedMax,currentQuery,isLoadingMore);
 
 @override
 String toString() {
-  return 'CatBreedState.loaded(catBreeds: $catBreeds)';
+  return 'CatBreedState.loaded(catBreeds: $catBreeds, page: $page, hasReachedMax: $hasReachedMax, currentQuery: $currentQuery, isLoadingMore: $isLoadingMore)';
 }
 
 
@@ -490,7 +604,7 @@ abstract mixin class _$LoadedCopyWith<$Res> implements $CatBreedStateCopyWith<$R
   factory _$LoadedCopyWith(_Loaded value, $Res Function(_Loaded) _then) = __$LoadedCopyWithImpl;
 @useResult
 $Res call({
- List<CatBreed> catBreeds
+ List<CatBreed> catBreeds, int page, bool hasReachedMax, String currentQuery, bool isLoadingMore
 });
 
 
@@ -507,10 +621,14 @@ class __$LoadedCopyWithImpl<$Res>
 
 /// Create a copy of CatBreedState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? catBreeds = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? catBreeds = null,Object? page = null,Object? hasReachedMax = null,Object? currentQuery = null,Object? isLoadingMore = null,}) {
   return _then(_Loaded(
-null == catBreeds ? _self._catBreeds : catBreeds // ignore: cast_nullable_to_non_nullable
-as List<CatBreed>,
+catBreeds: null == catBreeds ? _self._catBreeds : catBreeds // ignore: cast_nullable_to_non_nullable
+as List<CatBreed>,page: null == page ? _self.page : page // ignore: cast_nullable_to_non_nullable
+as int,hasReachedMax: null == hasReachedMax ? _self.hasReachedMax : hasReachedMax // ignore: cast_nullable_to_non_nullable
+as bool,currentQuery: null == currentQuery ? _self.currentQuery : currentQuery // ignore: cast_nullable_to_non_nullable
+as String,isLoadingMore: null == isLoadingMore ? _self.isLoadingMore : isLoadingMore // ignore: cast_nullable_to_non_nullable
+as bool,
   ));
 }
 
